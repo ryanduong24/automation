@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marketing Automation — Đề xuất chuyển đổi & Use case</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+    --bg:#f7f4ec; --card:#ffffff; --ink:#272219; --soft:#6f6557; --line:#e2dccd;
+    --gro:#b08a3e; --loy:#a8587a; --it:#4a8f8a; --dat:#7a9440;
+    --ant:#c06a3a; --dig:#46699e; --pm:#80619c;
+    --amber:#c47b2f; --ember:#bf4a25; --good:#5c7d3f;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);font-family:'Montserrat',sans-serif;
+    font-size:15px;-webkit-font-smoothing:antialiased;padding:40px 22px 70px}
+  .wrap{max-width:1080px;margin:0 auto}
+
+  /* ---------- HERO ---------- */
+  header{margin-bottom:8px}
+  h1{font-weight:900;font-size:clamp(1.9rem,4.4vw,2.8rem);letter-spacing:-.02em;line-height:1.08}
+  h1 em{font-style:normal;color:var(--ember)}
+
+  /* ---------- SECTION ---------- */
+  section{margin-top:42px}
+  .shead{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+  .snum{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;
+    color:var(--card);background:var(--ink);padding:5px 9px;border-radius:6px;flex-shrink:0}
+  .shead h2{font-weight:900;font-size:clamp(1.25rem,2.6vw,1.7rem);letter-spacing:-.015em}
+  .slead{color:var(--soft);font-size:13.5px;margin:0 0 16px 44px}
+
+  /* ---------- INTRO / FLOW ---------- */
+  .panel{background:var(--card);border:1.5px solid var(--ink);border-radius:11px;
+    padding:18px 20px}
+  .intro-txt{color:var(--soft);font-size:14px;max-width:78ch}
+  .intro-txt b{color:var(--ink)}
+
+  .flow{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:16px}
+  .fstep{background:#fff;border:1.5px solid var(--line);padding:14px 13px;position:relative}
+  .fstep:not(:last-child){border-right:none}
+  .fstep:first-child{border-radius:8px 0 0 8px}
+  .fstep:last-child{border-radius:0 8px 8px 0}
+  .fstep .fnum{width:30px;height:30px;border-radius:7px;display:flex;align-items:center;
+    justify-content:center;color:#fff;font-weight:800;font-size:14px;margin-bottom:9px;
+    font-family:'JetBrains Mono',monospace}
+  .fstep:nth-child(1) .fnum{background:var(--gro)}
+  .fstep:nth-child(2) .fnum{background:var(--amber)}
+  .fstep:nth-child(3) .fnum{background:var(--ant)}
+  .fstep:nth-child(4) .fnum{background:var(--dig)}
+  .fstep h4{font-size:13px;font-weight:800;margin-bottom:4px}
+  .fstep p{font-size:11.5px;color:var(--soft);line-height:1.4}
+  .fstep .farr{position:absolute;right:-11px;top:50%;transform:translateY(-50%);
+    width:20px;height:20px;background:var(--ink);color:#fff;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;font-size:11px;z-index:3}
+  .fstep:last-child .farr{display:none}
+
+  /* ---------- ROLE GRID ---------- */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:14px}
+  .role{background:#fff;border:1.5px solid var(--line);border-left:4px solid var(--good);
+    border-radius:7px;padding:12px 14px}
+  .role .rtag{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.1em;text-transform:uppercase;color:var(--good)}
+  .role h4{font-size:13.5px;font-weight:800;margin:3px 0 4px}
+  .role p{font-size:12px;color:var(--soft);line-height:1.42}
+
+  /* ---------- PAIN POINTS ---------- */
+  .pgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  .pain{background:var(--card);border:1.5px solid var(--line);border-left:4px solid var(--ember);
+    border-radius:7px;padding:13px 15px}
+  .pain .pk{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    color:var(--ember);letter-spacing:.08em}
+  .pain h4{font-size:14px;font-weight:800;margin:3px 0 6px}
+  .pain p{font-size:12.5px;color:var(--soft);line-height:1.45}
+  .pain p b{color:var(--ink)}
+
+  /* ---------- ERROR TABLE ---------- */
+  .errtbl{margin-top:13px;background:var(--card);border:1.5px solid var(--ink);
+    border-radius:10px;overflow:hidden}
+  .erow{display:grid;grid-template-columns:1.5fr .7fr 3.2fr;border-bottom:1px solid var(--line)}
+  .erow.eh{background:var(--ink)}
+  .erow.eh>div{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;
+    text-transform:uppercase;font-weight:700;color:var(--card);padding:11px 14px}
+  .erow>div{padding:12px 14px}
+  .ename{font-weight:800;font-size:12.5px;display:flex;align-items:center;gap:8px}
+  .ename .dot{width:9px;height:9px;border-radius:3px;flex-shrink:0}
+  .ecount{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.5rem;
+    color:var(--ember);line-height:1;display:flex;align-items:baseline;gap:4px}
+  .ecount small{font-size:10px;color:var(--soft);font-family:'Montserrat';font-weight:600}
+  .edet{font-size:11.5px;color:var(--soft);line-height:1.42}
+  .etot{display:flex;justify-content:space-between;align-items:center;
+    background:var(--ember);color:#fff;padding:13px 18px}
+  .etot span{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.08em;
+    text-transform:uppercase;font-weight:600}
+  .etot b{font-family:'JetBrains Mono',monospace;font-size:1.9rem;font-weight:700;line-height:1}
+
+  /* ---------- GOALS ---------- */
+  .goals{display:grid;grid-template-columns:1fr;gap:9px}
+  .goal{background:#fff;border:1.5px solid var(--line);border-radius:8px;
+    padding:12px 15px;display:flex;gap:15px;align-items:center}
+  .goal .gn{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.4rem;
+    color:var(--ember);flex-shrink:0;width:34px;text-align:center}
+  .goal .gt h4{font-size:13.5px;font-weight:800}
+  .goal .gt p{font-size:12px;color:var(--soft);line-height:1.4;margin-top:2px}
+  .goal .gm{margin-left:auto;flex-shrink:0;font-family:'JetBrains Mono',monospace;
+    font-size:10.5px;font-weight:700;background:#f0e7d4;color:var(--amber);
+    padding:5px 10px;border-radius:6px;white-space:nowrap}
+
+  /* ---------- REQUIREMENTS ---------- */
+  .reqgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+  .reqcol{background:var(--card);border:1.5px solid var(--line);border-radius:9px;overflow:hidden}
+  .reqcol .rh{display:flex;align-items:center;gap:9px;padding:11px 14px;
+    border-bottom:1.5px solid var(--ink)}
+  .reqcol .rh .ric{width:28px;height:28px;border-radius:7px;color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .reqcol:nth-child(1) .ric{background:var(--loy)}
+  .reqcol:nth-child(2) .ric{background:var(--it)}
+  .reqcol:nth-child(3) .ric{background:var(--pm)}
+  .reqcol .rh h4{font-size:13px;font-weight:800}
+  .reqcol ul{list-style:none;padding:9px 14px 13px}
+  .reqcol li{font-size:11.8px;padding:7px 0 7px 17px;position:relative;
+    border-bottom:1px dotted var(--line);color:var(--ink);line-height:1.4}
+  .reqcol li:last-child{border-bottom:none}
+  .reqcol li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:8px;
+    border:2px solid var(--ember);border-radius:2px}
+
+  /* ---------- SCORECARD ---------- */
+  .scorebox{background:var(--card);border:1.5px solid var(--ink);border-radius:11px;
+    padding:18px 20px}
+  .slegend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:16px}
+  .slegend span{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;
+    font-family:'JetBrains Mono',monospace}
+  .slegend i{width:12px;height:12px;border-radius:3px}
+  .crit{margin-bottom:15px}
+  .crit .cl{display:flex;align-items:baseline;gap:8px;margin-bottom:7px}
+  .crit .cl strong{font-size:13px;font-weight:800}
+  .crit .cl span{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--soft)}
+  .bline{display:flex;align-items:center;gap:9px;margin-bottom:5px}
+  .bn{width:78px;flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:10.5px;
+    font-weight:700;text-align:right;color:var(--soft)}
+  .btrack{flex:1;height:20px;background:#e6ddc8;border-radius:4px;overflow:hidden}
+  .bfill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;
+    padding-right:7px;color:#fff;font-size:10.5px;font-weight:700;
+    font-family:'JetBrains Mono',monospace;width:0;
+    transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+  .totals{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;margin-top:18px;
+    padding-top:16px;border-top:1.5px dashed var(--line)}
+  .tcard{text-align:center;padding:14px 8px;border:1.5px solid var(--line);
+    border-radius:8px;background:var(--bg);position:relative}
+  .tcard.win{border:2px solid var(--ember);background:#fbf2e4}
+  .tcard .crown{position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+    background:var(--ember);color:#fff;font-family:'JetBrains Mono',monospace;
+    font-size:9px;font-weight:700;padding:3px 8px;border-radius:9px;white-space:nowrap}
+  .tcard .tn{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;
+    color:var(--soft);text-transform:uppercase}
+  .tcard .ts{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.9rem;
+    line-height:1;margin-top:5px}
+  .tcard.win .ts{color:var(--ember)}
+  .tcard .tr{font-size:9.5px;color:var(--soft);margin-top:3px;
+    font-family:'JetBrains Mono',monospace}
+
+  /* ---------- QUICK ASSESSMENT ---------- */
+  .subhead{font-weight:800;font-size:1.05rem;margin:22px 0 12px;
+    display:flex;align-items:center;gap:10px}
+  .subhead::before{content:"";width:22px;height:3px;background:var(--ember);border-radius:2px}
+  .assess{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+  .assess .acard:last-child{grid-column:1/-1}
+  .acard{background:var(--card);border:1.5px solid var(--line);border-left:4px solid var(--ac);
+    border-radius:9px;padding:14px 16px;position:relative}
+  .acard.apick{border:2px solid var(--good);border-left-width:4px;background:#f3f6ed}
+  .abadge{position:absolute;top:-10px;right:14px;background:var(--good);color:#fff;
+    font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+    padding:3px 9px;border-radius:9px;letter-spacing:.05em}
+  .atop{display:flex;align-items:baseline;gap:10px;margin-bottom:7px}
+  .aname{font-weight:800;font-size:15px}
+  .ascore{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.15rem;
+    color:var(--ac);margin-left:auto}
+  .atext{font-size:12.3px;color:var(--soft);line-height:1.5;margin-bottom:10px}
+  .atags{display:flex;flex-wrap:wrap;gap:6px}
+  .atag{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    padding:4px 8px;border-radius:5px;letter-spacing:.02em}
+  .atag.pro{background:#e7eedd;color:#3f5c2a}
+  .atag.con{background:#f6ddd5;color:#9a3a22}
+
+  /* ---------- TIMELINE ---------- */
+  .tl{position:relative;padding-left:30px;margin-top:4px}
+  .tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(var(--ember),var(--amber),var(--good))}
+  .tli{position:relative;padding:0 0 18px 6px}
+  .tli:last-child{padding-bottom:0}
+  .tli::before{content:"";position:absolute;left:-28px;top:2px;width:17px;height:17px;
+    border-radius:50%;background:var(--card);border:3px solid var(--ember)}
+  .tli:nth-child(2)::before{border-color:var(--amber)}
+  .tli:nth-child(3)::before{border-color:var(--dat)}
+  .tli:nth-child(4)::before{border-color:var(--good)}
+  .tli .tp{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    color:var(--ember);letter-spacing:.08em;text-transform:uppercase}
+  .tli h4{font-size:13.5px;font-weight:800;margin:2px 0 4px}
+  .tli p{font-size:12px;color:var(--soft);line-height:1.45}
+
+  /* ---------- RISK ---------- */
+  .risk{background:#fff;border:1.5px solid var(--line);border-radius:8px;padding:13px 15px}
+  .risk .rhd{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+  .risk .rbadge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+    background:#f3ddd3;color:var(--ember);padding:3px 8px;border-radius:5px;letter-spacing:.06em}
+  .risk h4{font-size:13px;font-weight:800}
+  .risk .rmit{font-size:11.8px;background:#eef0e4;border-left:3px solid var(--good);
+    padding:9px 12px;border-radius:4px;color:var(--ink);line-height:1.45}
+  .risk .rmit b{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    color:var(--good);letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;
+    font-weight:700}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+
+  @media(max-width:780px){
+    .flow,.pgrid,.grid2,.reqgrid,.assess{grid-template-columns:1fr}
+    .fstep{border-right:1.5px solid var(--line)!important;border-radius:8px!important}
+    .fstep .farr{display:none}
+    .totals{grid-template-columns:repeat(2,1fr)}
+    .erow,.erow.eh{grid-template-columns:1fr}
+    .erow.eh{display:none}
+    .erow>div{border-bottom:1px solid var(--line)}
+    .goal{flex-wrap:wrap}.goal .gm{margin-left:0}
+  }
+  @media(max-width:560px){body{padding:26px 14px 50px}}
+
+/* ---------- SUMMARY CARDS ---------- */
+  .summary{display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:14px}
+  .scard{background:var(--card);border:1.5px solid var(--line);border-radius:11px;
+    padding:14px 16px;border-top:4px solid var(--net);position:relative}
+  .scard:nth-child(1){border-top-color:var(--ins)}
+  .scard:nth-child(2){border-top-color:var(--clv)}
+  .scard:nth-child(3){border-top-color:var(--ant)}
+  .scard:nth-child(4){border-top-color:var(--net)}
+  .scard .sname{font-weight:800;font-size:15px;display:flex;align-items:center;
+    gap:7px;margin-bottom:3px}
+  .scard .savg{margin-left:auto;font-family:'JetBrains Mono',monospace;font-weight:700;
+    font-size:1.25rem;color:var(--ink)}
+  .scard:nth-child(1) .savg{color:var(--ins)}
+  .scard:nth-child(2) .savg{color:var(--clv)}
+  .scard:nth-child(3) .savg{color:var(--ant)}
+  .scard:nth-child(4) .savg{color:var(--net)}
+  .scard .srank{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    color:var(--soft);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+  .scard .sbar{display:flex;height:11px;border-radius:6px;overflow:hidden;margin-bottom:9px;
+    border:1px solid var(--line)}
+  .scard .sbar i{display:block;height:100%}
+  .scard .sstat{display:flex;gap:11px;flex-wrap:wrap}
+  .scard .st{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+    display:flex;align-items:center;gap:5px;color:var(--soft)}
+  .scard .st b{font-size:14px;color:var(--ink)}
+  .scard .st .pt{width:9px;height:9px;border-radius:3px}
+  .scard .swin{position:absolute;top:-9px;right:12px;background:var(--ember);color:#fff;
+    font-family:'JetBrains Mono',monospace;font-size:8.5px;font-weight:700;
+    padding:3px 8px;border-radius:9px;letter-spacing:.06em}
+
+  /* ---------- LEGEND BAR ---------- */
+  .legend-bar{display:flex;flex-wrap:wrap;gap:16px;margin-bottom:12px;padding:0 2px}
+  .legend-bar span{font-size:12px;font-weight:600;display:flex;align-items:center;gap:7px;
+    color:var(--soft)}
+  .legend-bar i{width:13px;height:13px;border-radius:3px;display:inline-block}
+
+  /* ---------- TABLE ---------- */
+  .tablecard{background:var(--card);border:1.5px solid var(--ink);border-radius:12px}
+  .thead{display:grid;grid-template-columns:34px 1.5fr 1.9fr 1.6fr repeat(4,82px);
+    background:var(--ink);position:sticky;top:58px;z-index:40;
+    border-radius:11px 11px 0 0}
+  .thead>div{font-family:'JetBrains Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.07em;text-transform:uppercase;color:var(--card);padding:12px 11px;
+    text-align:left;border-right:1px solid rgba(255,255,255,.12)}
+  .thead>div:last-child{border-right:none}
+  .thead .tsys{text-align:center}
+
+  .urow{display:grid;grid-template-columns:34px 1.5fr 1.9fr 1.6fr repeat(4,82px);
+    border-bottom:1px solid var(--line);transition:background .15s}
+  .urow:last-child{border-bottom:none;border-radius:0 0 11px 11px;overflow:hidden}
+  .urow:hover{background:#faf7ef}
+  .urow>div{padding:13px 11px;border-right:1px solid var(--line);font-size:12px;
+    display:flex;flex-direction:column;justify-content:center}
+  .urow>div:last-child{border-right:none}
+  .u-id{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:12px;
+    color:var(--soft);text-align:center;align-items:center}
+  .u-goal{font-weight:800;font-size:12.5px;line-height:1.3}
+  .u-scn{color:var(--soft);font-size:11.2px;line-height:1.42}
+  .u-field{font-size:10.6px;color:var(--soft);line-height:1.45}
+  .u-field b{color:var(--ink);font-weight:700}
+  .u-cur{display:inline-block;margin-top:5px;font-family:'JetBrains Mono',monospace;
+    font-size:9px;font-weight:700;padding:2px 7px;border-radius:5px;
+    background:#eef0e4;color:var(--good);width:fit-content;letter-spacing:.04em}
+  .u-cur.na{background:#f0ece1;color:var(--soft)}
+
+  .stat{align-items:center;justify-content:center;gap:5px}
+  .uscore{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;
+    color:var(--ink)}
+  .uscore.nasc{color:#c0b6a3;font-weight:600}
+  .pill{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;
+    padding:5px 0;border-radius:6px;width:100%;text-align:center;letter-spacing:.02em;
+    border:1.5px solid transparent}
+  .pill.full{background:#e7eedd;color:#3f5c2a;border-color:#cdddb8}
+  .pill.part{background:#f6ebd0;color:#8a6212;border-color:#e8d49f}
+  .pill.none{background:#f6ddd5;color:#9a3a22;border-color:#e8c2b5}
+  .pill .ic{font-size:10px;margin-right:2px}
+
+  /* current-system marker */
+  .stat.iscur{position:relative}
+  .stat.iscur::after{content:"";position:absolute;inset:3px;border:1.5px dashed var(--ink);
+    border-radius:8px;opacity:.4;pointer-events:none}
+
+
+  @media(max-width:880px){
+    .summary{grid-template-columns:1fr 1fr}
+    .thead{display:none}
+    .urow{grid-template-columns:1fr 1fr;gap:0}
+    .urow>div{border-right:none;border-bottom:1px solid var(--line)}
+    .u-id{flex-direction:row;justify-content:flex-start;gap:7px}
+    .u-id::before{content:"Use case";font-family:'JetBrains Mono',monospace;
+      font-size:9px;text-transform:uppercase;color:var(--soft)}
+    .u-goal,.u-scn,.u-field{grid-column:1/-1}
+    .stat::before{font-family:'JetBrains Mono',monospace;font-size:9px;
+      text-transform:uppercase;color:var(--soft);margin-bottom:4px;font-weight:700}
+    .stat:nth-child(5)::before{content:"Netcore"}
+    .stat:nth-child(6)::before{content:"Antsomi"}
+    .stat:nth-child(7)::before{content:"Insider"}
+    .stat:nth-child(8)::before{content:"CleverTap"}
+  }
+  @media(max-width:560px){body{padding:26px 14px 50px}.summary{grid-template-columns:1fr}}
+
+  @media(max-width:880px){
+    .summary{grid-template-columns:1fr 1fr}
+    .thead{display:none}
+    .urow{grid-template-columns:1fr 1fr;gap:0}
+    .urow>div{border-right:none;border-bottom:1px solid var(--line)}
+    .u-id{flex-direction:row;justify-content:flex-start;gap:7px}
+    .u-id::before{content:"Use case";font-family:'JetBrains Mono',monospace;
+      font-size:9px;text-transform:uppercase;color:var(--soft)}
+    .u-goal,.u-scn,.u-field{grid-column:1/-1}
+    .stat::before{font-family:'JetBrains Mono',monospace;font-size:9px;
+      text-transform:uppercase;color:var(--soft);margin-bottom:4px;font-weight:700}
+    .stat:nth-child(5)::before{content:"Netcore"}
+    .stat:nth-child(6)::before{content:"Antsomi"}
+    .stat:nth-child(7)::before{content:"Insider"}
+    .stat:nth-child(8)::before{content:"CleverTap"}
+  }
+  @media(max-width:560px){body{padding:26px 14px 50px}.summary{grid-template-columns:1fr}}
+
+  /* ---------- TABS ---------- */
+  .tabbar{display:flex;gap:4px;margin:20px 0 24px;border-bottom:2px solid var(--ink);
+    position:sticky;top:0;background:var(--bg);z-index:50;padding-top:6px}
+  .tabbtn{font-family:'Montserrat',sans-serif;font-size:13.5px;font-weight:800;
+    background:transparent;color:var(--soft);padding:13px 20px;cursor:pointer;
+    border:2px solid transparent;border-bottom:none;border-radius:9px 9px 0 0;
+    transition:.15s;position:relative;top:2px;display:flex;align-items:center;gap:9px}
+  .tabbtn .tnum{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+    background:var(--line);color:var(--soft);width:21px;height:21px;border-radius:5px;
+    display:flex;align-items:center;justify-content:center;transition:.15s;flex-shrink:0}
+  .tabbtn:hover:not(.on){color:var(--ink)}
+  .tabbtn.on{color:var(--ink);background:var(--card);
+    border-color:var(--ink);border-bottom:2px solid var(--card)}
+  .tabbtn.on .tnum{background:var(--ember);color:#fff}
+  .tab-panel{display:none}
+  .tab-panel.on{display:block;animation:tabfade .35s ease}
+  @keyframes tabfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  @media(max-width:560px){
+    .tabbtn{padding:11px 12px;font-size:11.5px;gap:6px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Marketing Automation —<br><em>Đề xuất chuyển đổi hệ thống</em></h1>
+  </header>
+
+  <div class="tabbar" role="tablist">
+    <button class="tabbtn on" data-tab="t1"><span class="tnum">01</span>Đề xuất chuyển đổi</button>
+    <button class="tabbtn" data-tab="t2"><span class="tnum">02</span>Use case &amp; mức độ đáp ứng</button>
+  </div>
+
+  <!-- ============ TAB 1 · ĐỀ XUẤT ============ -->
+  <div class="tab-panel on" id="t1">
+
+<!-- ============ 00. KHÁI NIỆM ============ -->
+  <section>
+    <div class="shead rv">
+      <span class="snum">00</span>
+      <h2>Marketing Automation trong F&B là gì?</h2>
+    </div>
+    <p class="slead rv">Không chỉ là tự động gửi tin — đây là hệ thống điều phối tương tác đa kênh theo thời gian thực.</p>
+
+    <div class="panel rv">
+      <p class="intro-txt">Với mô hình chuỗi nhà hàng quy mô lớn, Marketing Automation là hệ thống <b>điều phối tương tác đa kênh (Omnichannel Orchestration)</b> theo thời gian thực, dựa trên hành vi, sở thích, vị trí và lịch sử chi tiêu của từng khách hàng. Hệ thống tự động hóa toàn bộ hành trình — từ lúc khách nhận biết, tìm nhà hàng, đặt bàn, dùng bữa tại chỗ, cho đến chăm sóc sau ăn và giữ chân dài hạn.</p>
+
+      <div class="flow">
+        <div class="fstep">
+          <div class="fnum">1</div>
+          <h4>Hành vi khách hàng</h4>
+          <p>Xem menu hoặc định vị gần nhà hàng — dữ liệu gửi về CDP theo thời gian thực.</p>
+          <div class="farr">→</div>
+        </div>
+        <div class="fstep">
+          <div class="fnum">2</div>
+          <h4>Automation Engine</h4>
+          <p>Phân tích sở thích, thời tiết và giờ ăn để chọn kịch bản đa kênh phù hợp.</p>
+          <div class="farr">→</div>
+        </div>
+        <div class="fstep">
+          <div class="fnum">3</div>
+          <h4>Thông điệp cá nhân hóa</h4>
+          <p>Gửi Push App / Zalo kèm voucher "cần lấy" tới đúng người, đúng thời điểm.</p>
+          <div class="farr">→</div>
+        </div>
+        <div class="fstep">
+          <div class="fnum">4</div>
+          <h4>Phản hồi tại POS</h4>
+          <p>Ghi nhận lượt đặt bàn và đổi điểm — hoàn tất hành trình trải nghiệm khách hàng.</p>
+          <div class="farr">→</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <div class="role rv">
+        <div class="rtag">Frequency</div>
+        <h4>Tăng tần suất quay lại</h4>
+        <p>Ngành nhà hàng sống nhờ khách quen. Hệ thống nhận diện đúng thời điểm khách sắp rời bỏ hoặc sắp đến chu kỳ ăn tiếp theo để kích hoạt kịch bản lôi kéo tức thì.</p>
+      </div>
+      <div class="role rv">
+        <div class="rtag">AOV</div>
+        <h4>Tối ưu giá trị đơn hàng</h4>
+        <p>Recommendation Engine gợi ý món ăn kèm hoặc buffet nâng hạng phù hợp lịch sử ăn uống, ngay khi khách quét QR gọi món tại bàn.</p>
+      </div>
+      <div class="role rv">
+        <div class="rtag">CX at Scale</div>
+        <h4>Cá nhân hóa quy mô lớn</h4>
+        <p>Thay vì gửi một tin spam chung cho hơn 1,5 triệu thành viên, hệ thống phân tập sâu để gợi ý đúng thương hiệu yêu thích của từng nhóm khách.</p>
+      </div>
+      <div class="role rv">
+        <div class="rtag">Efficiency</div>
+        <h4>Giải phóng đội vận hành</h4>
+        <p>Rút thời gian từ ý tưởng đến lúc chạy chiến dịch từ 3 ngày xuống dưới 2 giờ, loại bỏ việc xuất nhập file Excel thủ công giữa IT, CRM và Marketing.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01. PAIN POINTS ============ -->
+  <section>
+    <div class="shead rv">
+      <span class="snum">01</span>
+      <h2>Lý do phải thay: các "pain point"</h2>
+    </div>
+    <p class="slead rv">Duy trì Netcore không chỉ là vấn đề kỹ thuật cũ — nó đang trực tiếp làm mất cơ hội kinh doanh và lãng phí nguồn lực.</p>
+
+    <div class="pgrid">
+      <div class="pain rv">
+        <div class="pk">PAIN 1.1</div>
+        <h4>Lỗi phân tập & trigger sai</h4>
+        <p>Segment hoạt động thiếu ổn định, nhận diện sai đối tượng. <b>Trigger sai thời điểm</b> — khách vừa nhận voucher, đáng lẽ phải nhận Push ngay để đi sử dụng, nhưng Netcore gửi chậm hoặc không gửi khiến khách không đi ăn. <b>Hệ quả: mất cơ hội chốt sale.</b></p>
+      </div>
+      <div class="pain rv">
+        <div class="pk">PAIN 1.2</div>
+        <h4>Luồng dữ liệu lỗi & sinh rác</h4>
+        <p>Dữ liệu đồng bộ từ DAT/CDP Antsomi lên Netcore hay bị lỗi không xử lý được. Dữ liệu xuất ngược về thì <b>không ổn định, lẫn rác, thiếu Data Schema/Dictionary</b> — đội Data mất rất nhiều giờ làm sạch thủ công.</p>
+      </div>
+      <div class="pain rv">
+        <div class="pk">PAIN 1.3</div>
+        <h4>Không có SLA, hỗ trợ yếu</h4>
+        <p>Không có đội hỗ trợ tại Việt Nam — mọi sự cố phải chuyển về team tại Ấn Độ. Nhiều lỗi phải <b>chờ tới 15 ngày</b> chỉ để đối tác kiểm tra và xử lý.</p>
+      </div>
+      <div class="pain rv">
+        <div class="pk">PAIN 1.4</div>
+        <h4>Hạn chế biến tùy chỉnh & thời gian</h4>
+        <p>Hệ thống không tự trigger theo biến thời gian (nhắc voucher sắp hết hạn) — đội Data phải tính thủ công dưới DAT rồi đẩy lên. Thêm một biến cá nhân hóa mới mất <b>cả tuần</b>, làm lỡ nhịp thị trường.</p>
+      </div>
+    </div>
+
+    <!-- ERROR TABLE -->
+    <div class="errtbl rv">
+      <div class="erow eh">
+        <div>Nhóm lỗi</div>
+        <div>Số lỗi</div>
+        <div>Sự cố tiêu biểu — 12 tháng gần nhất</div>
+      </div>
+      <div class="erow">
+        <div class="ename"><span class="dot" style="background:var(--ember)"></span>Zalo (ZNS)</div>
+        <div class="ecount">9<small>lỗi</small></div>
+        <div class="edet">Không gửi được tin nhắn (ID 2155, 2157, 2207, 2231, 2234, 2235); lỗi hiển thị biến {{payload.gcoin}}; delay 1,5 tiếng (ID 2528).</div>
+      </div>
+      <div class="erow">
+        <div class="ename"><span class="dot" style="background:var(--amber)"></span>Hệ thống &amp; Panel</div>
+        <div class="ecount">6<small>lỗi</small></div>
+        <div class="edet">Lỗi dán list ID vào Segment; lỗi hiển thị Profile khi payload có dấu chấm; phân biệt chữ hoa/thường trong Journey.</div>
+      </div>
+      <div class="erow">
+        <div class="ename"><span class="dot" style="background:var(--dig)"></span>Email &amp; Tracking</div>
+        <div class="ecount">5<small>lỗi</small></div>
+        <div class="edet">Lỗi cá nhân hóa hiển thị FIRST NAME; tỷ lệ click/revenue giảm 99% do mất tracking; domain bị hạ uy tín xuống mức Bad.</div>
+      </div>
+      <div class="erow">
+        <div class="ename"><span class="dot" style="background:var(--good)"></span>In-app &amp; App Push</div>
+        <div class="ecount">3<small>lỗi</small></div>
+        <div class="edet">Không hiển thị pop-up trên mọi campaign; gửi lặp tin nhắn (dup) cho khách; lỗi preview ảnh khi set campaign.</div>
+      </div>
+      <div class="etot">
+        <span>Tổng lỗi ghi nhận qua group vận hành</span>
+        <b>23</b>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02. MỤC TIÊU ============ -->
+  <section>
+    <div class="shead rv">
+      <span class="snum">02</span>
+      <h2>Mục tiêu đổi hệ thống</h2>
+    </div>
+    <p class="slead rv">Định nghĩa "thắng" trước khi chọn vendor — 5 kết quả kinh doanh cốt lõi.</p>
+
+    <div class="goals">
+      <div class="goal rv">
+        <div class="gn">01</div>
+        <div class="gt">
+          <h4>Zero Missed Opportunities — không bỏ lỡ cơ hội</h4>
+          <p>Đảm bảo trigger Real-time cho các sự kiện nhạy cảm: thanh toán lỗi, nhận mã refer, check-in gần nhà hàng.</p>
+        </div>
+        <div class="gm">Trigger &lt; 3 giây</div>
+      </div>
+      <div class="goal rv">
+        <div class="gn">02</div>
+        <div class="gt">
+          <h4>Self-serve &amp; Agility — tự chủ vận hành</h4>
+          <p>Thời gian thiết lập biến mới hoặc chiến dịch mới giảm từ tính bằng tuần xuống tính bằng phút.</p>
+        </div>
+        <div class="gm">SLA bug Critical: 4–8h</div>
+      </div>
+      <div class="goal rv">
+        <div class="gn">03</div>
+        <div class="gt">
+          <h4>Data Integrity — bảo vệ luồng dữ liệu</h4>
+          <p>Tự động hóa 100% luồng đồng bộ hai chiều với hệ thống DAT và CDP Antsomi, mượt mà và không sinh rác.</p>
+        </div>
+        <div class="gm">Đồng bộ 2 chiều · 100%</div>
+      </div>
+      <div class="goal rv">
+        <div class="gn">04</div>
+        <div class="gt">
+          <h4>Over-treatment Control — bảo vệ thương hiệu</h4>
+          <p>Global Capping giới hạn tần suất nhận tin chéo giữa các brand (Gogi, Kichi, Manwah…), tránh spam khách hàng.</p>
+        </div>
+        <div class="gm">Chống spam đa brand</div>
+      </div>
+      <div class="goal rv">
+        <div class="gn">05</div>
+        <div class="gt">
+          <h4>Tối ưu chi phí gửi tin</h4>
+          <p>Triển khai Fallback Channel, ưu tiên Push App TGS → Zalo ZNS → SMS để giảm chi phí truyền thông.</p>
+        </div>
+        <div class="gm">Push → ZNS → SMS</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03. YÊU CẦU ============ -->
+  <section>
+    <div class="shead rv">
+      <span class="snum">03</span>
+      <h2>Yêu cầu nghiệp vụ &amp; kỹ thuật</h2>
+    </div>
+    <p class="slead rv">Các tiêu chí must-have cho mô hình F&B đa thương hiệu.</p>
+
+    <div class="reqgrid">
+      <div class="reqcol rv">
+        <div class="rh"><span class="ric">◆</span><h4>Nghiệp vụ / Marketing</h4></div>
+        <ul>
+          <li>Journey builder đa kênh: App Push, In-app, In-web, Web push, ZNS, SMS</li>
+          <li>Đọc và hiểu Custom Variables / Dynamic attributes dễ dàng, không cần hard-code</li>
+          <li>Frequency cap theo cấp độ Customer</li>
+        </ul>
+      </div>
+      <div class="reqcol rv">
+        <div class="rh"><span class="ric">⬡</span><h4>Dữ liệu / Tích hợp</h4></div>
+        <ul>
+          <li>Tích hợp native hoặc API throughput cao với DAT nội bộ và CDP Antsomi</li>
+          <li>API Real-time trigger siêu tốc, đáp ứng luồng O2O tại điểm bán POS</li>
+        </ul>
+      </div>
+      <div class="reqcol rv">
+        <div class="rh"><span class="ric">⚿</span><h4>Governance / Quản trị</h4></div>
+        <ul>
+          <li>Phân quyền Role-based access chặt chẽ cho từng người dùng</li>
+          <li>Audit log chi tiết để truy vết khi có sự cố gửi nhầm hoặc lỗi chiến dịch</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04. SCORECARD ============ -->
+  <section>
+    <div class="shead rv">
+      <span class="snum">04</span>
+      <h2>Bảng chấm điểm vendor</h2>
+    </div>
+    <p class="slead rv">So sánh 5 nền tảng theo 4 tiêu chí có trọng số — thang điểm 5.</p>
+
+    <div class="scorebox rv">
+      <div class="slegend">
+        <span><i style="background:var(--ember)"></i>Insider</span>
+        <span><i style="background:var(--it)"></i>Netcore</span>
+        <span><i style="background:var(--good)"></i>CleverTap</span>
+        <span><i style="background:var(--amber)"></i>Antsomi</span>
+        <span><i style="background:var(--pm)"></i>Salesforce</span>
+      </div>
+
+      <!-- Tính năng -->
+      <div class="crit rv">
+        <div class="cl"><strong>Tính năng</strong><span>Trọng số 65%</span></div>
+        <div class="bline"><span class="bn">Insider</span><div class="btrack"><div class="bfill" data-w="73.4" style="background:var(--ember)">3.67</div></div></div>
+        <div class="bline"><span class="bn">Netcore</span><div class="btrack"><div class="bfill" data-w="53.6" style="background:var(--it)">2.68</div></div></div>
+        <div class="bline"><span class="bn">CleverTap</span><div class="btrack"><div class="bfill" data-w="71.8" style="background:var(--good)">3.59</div></div></div>
+        <div class="bline"><span class="bn">Antsomi</span><div class="btrack"><div class="bfill" data-w="52.0" style="background:var(--amber)">2.60</div></div></div>
+        <div class="bline"><span class="bn">Salesforce</span><div class="btrack"><div class="bfill" data-w="50.4" style="background:var(--pm)">2.52</div></div></div>
+      </div>
+
+      <!-- Hỗ trợ vận hành -->
+      <div class="crit rv">
+        <div class="cl"><strong>Hỗ trợ vận hành</strong><span>Trọng số 25%</span></div>
+        <div class="bline"><span class="bn">Insider</span><div class="btrack"><div class="bfill" data-w="66.6" style="background:var(--ember)">3.33</div></div></div>
+        <div class="bline"><span class="bn">Netcore</span><div class="btrack"><div class="bfill" data-w="30.0" style="background:var(--it)">1.50</div></div></div>
+        <div class="bline"><span class="bn">CleverTap</span><div class="btrack"><div class="bfill" data-w="63.0" style="background:var(--good)">3.15</div></div></div>
+        <div class="bline"><span class="bn">Antsomi</span><div class="btrack"><div class="bfill" data-w="88.4" style="background:var(--amber)">4.42</div></div></div>
+        <div class="bline"><span class="bn">Salesforce</span><div class="btrack"><div class="bfill" data-w="40.0" style="background:var(--pm)">2.00</div></div></div>
+      </div>
+
+      <!-- Kinh nghiệm -->
+      <div class="crit rv">
+        <div class="cl"><strong>Kinh nghiệm</strong><span>Trọng số 10%</span></div>
+        <div class="bline"><span class="bn">Insider</span><div class="btrack"><div class="bfill" data-w="83.4" style="background:var(--ember)">4.17</div></div></div>
+        <div class="bline"><span class="bn">Netcore</span><div class="btrack"><div class="bfill" data-w="54.4" style="background:var(--it)">2.72</div></div></div>
+        <div class="bline"><span class="bn">CleverTap</span><div class="btrack"><div class="bfill" data-w="43.4" style="background:var(--good)">2.17</div></div></div>
+        <div class="bline"><span class="bn">Antsomi</span><div class="btrack"><div class="bfill" data-w="43.4" style="background:var(--amber)">2.17</div></div></div>
+        <div class="bline"><span class="bn">Salesforce</span><div class="btrack"><div class="bfill" data-w="30.0" style="background:var(--pm)">1.50</div></div></div>
+      </div>
+
+      <!-- TOTALS -->
+      <div class="totals">
+        <div class="tcard win rv">
+          <div class="crown">★ XẾP HẠNG 1</div>
+          <div class="tn">Insider</div>
+          <div class="ts">3.63</div>
+          <div class="tr">Tổng điểm trọng số</div>
+        </div>
+        <div class="tcard rv">
+          <div class="tn">CleverTap</div>
+          <div class="ts">3.34</div>
+          <div class="tr">Hạng 2</div>
+        </div>
+        <div class="tcard rv">
+          <div class="tn">Antsomi</div>
+          <div class="ts">3.01</div>
+          <div class="tr">Hạng 3</div>
+        </div>
+        <div class="tcard rv">
+          <div class="tn">Netcore</div>
+          <div class="ts">2.39</div>
+          <div class="tr">Hạng 4 · hiện tại</div>
+        </div>
+        <div class="tcard rv">
+          <div class="tn">Salesforce</div>
+          <div class="ts">2.29</div>
+          <div class="tr">Hạng 5</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ĐÁNH GIÁ NHANH TỪ TEAM VẬN HÀNH -->
+    <h3 class="subhead rv">Đánh giá nhanh từ Team Vận hành</h3>
+    <div class="assess">
+      <div class="acard rv" style="--ac:var(--it)">
+        <div class="atop">
+          <span class="aname">Netcore</span>
+          <span class="ascore">2.39</span>
+        </div>
+        <p class="atext">Chi phí rất rẻ nhưng công nghệ lỗi thời, thường xuyên nghẽn trigger và thiếu hoàn toàn các tính năng AI gợi ý ưu đãi / nhà hàng / món — ảnh hưởng trực tiếp đến doanh thu và uy tín CX.</p>
+        <div class="atags">
+          <span class="atag pro">+ Chi phí thấp</span>
+          <span class="atag con">− Công nghệ lỗi thời</span>
+          <span class="atag con">− Không có AI gợi ý</span>
+        </div>
+      </div>
+
+      <div class="acard rv" style="--ac:var(--amber)">
+        <div class="atop">
+          <span class="aname">Antsomi</span>
+          <span class="ascore">3.01</span>
+        </div>
+        <p class="atext">Đóng vai trò lưu trữ CDP rất tốt. Tuy nhiên ở mảng Marketing Activation và Real-time Campaign, giao diện tương tác còn phức tạp và khả năng trigger real-time trên App chưa mượt.</p>
+        <div class="atags">
+          <span class="atag pro">+ Lưu trữ CDP mạnh</span>
+          <span class="atag con">− Giao diện phức tạp</span>
+          <span class="atag con">− Real-time App chưa mượt</span>
+        </div>
+      </div>
+
+      <div class="acard rv" style="--ac:var(--pm)">
+        <div class="atop">
+          <span class="aname">Salesforce</span>
+          <span class="ascore">2.29</span>
+        </div>
+        <p class="atext">Giải pháp CRM cực kỳ đồ sộ cho doanh nghiệp lớn, nhưng chi phí quá đắt đỏ, giao diện vận hành phức tạp và các kịch bản tương tác Web/App kém linh hoạt hơn các nền tảng Marketing chuyên dụng.</p>
+        <div class="atags">
+          <span class="atag pro">+ CRM toàn diện</span>
+          <span class="atag con">− Chi phí rất cao</span>
+          <span class="atag con">− Kém linh hoạt Web/App</span>
+        </div>
+      </div>
+
+      <div class="acard rv" style="--ac:var(--ember)">
+        <div class="atop">
+          <span class="aname">Insider</span>
+          <span class="ascore">3.63</span>
+        </div>
+        <p class="atext">Nền tảng cá nhân hóa xuất sắc nhất thị trường Việt Nam hiện nay, đội ngũ hỗ trợ tại chỗ rất chuyên nghiệp. Rào cản lớn nhất là chi phí cao và giới hạn lưu trữ dữ liệu hành vi quá ngắn.</p>
+        <div class="atags">
+          <span class="atag pro">+ Cá nhân hóa tốt nhất</span>
+          <span class="atag pro">+ Hỗ trợ tại chỗ</span>
+          <span class="atag con">− ~174,4 triệu/tháng</span>
+          <span class="atag con">− Lookback chỉ 365 ngày</span>
+        </div>
+      </div>
+
+      <div class="acard apick rv" style="--ac:var(--good)">
+        <span class="abadge">★ Đề xuất chọn</span>
+        <div class="atop">
+          <span class="aname">CleverTap</span>
+          <span class="ascore">3.34</span>
+        </div>
+        <p class="atext">Đạt điểm cân bằng tối ưu giữa năng lực công nghệ vượt trội (đáp ứng 22/23 use case, ngang ngửa Insider) và hiệu quả chi phí cực tốt. Khả năng lưu trữ dữ liệu lookback vượt trội lên tới 10 năm.</p>
+        <div class="atags">
+          <span class="atag pro">+ 22/23 use case</span>
+          <span class="atag pro">+ ~154,6 triệu/tháng</span>
+          <span class="atag pro">+ Lookback 10 năm</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05. MIGRATION ============ -->
+  <section>
+    <div class="shead rv">
+      <span class="snum">05</span>
+      <h2>Kế hoạch triển khai &amp; migration</h2>
+    </div>
+    <p class="slead rv">Triển khai cuốn chiếu theo giai đoạn — không làm gián đoạn kinh doanh.</p>
+
+    <div class="panel rv">
+      <div class="tl">
+        <div class="tli">
+          <div class="tp">Giai đoạn 1</div>
+          <h4>Pilot / Proof of Concept</h4>
+          <p>Triển khai thí điểm trên một dự án thực tế (ví dụ dự án GTBB) trong vòng 1 tháng để kiểm chứng năng lực hệ thống mới.</p>
+        </div>
+        <div class="tli">
+          <div class="tp">Giai đoạn 2</div>
+          <h4>Mở rộng cuốn chiếu</h4>
+          <p>Lần lượt đưa các thương hiệu và luồng nghiệp vụ còn lại lên hệ thống mới sau khi Pilot đạt tiêu chí thành công.</p>
+        </div>
+        <div class="tli">
+          <div class="tp">Migration Plan</div>
+          <h4>Dọn dẹp &amp; đồng bộ dữ liệu</h4>
+          <p>Dọn dẹp Data Schema trước khi chuyển. Đồng bộ User Consent (quyền gửi tin) sang hệ thống mới để đảm bảo tính pháp lý.</p>
+        </div>
+        <div class="tli">
+          <div class="tp">Cutover Plan</div>
+          <h4>Dual-run song song 4 tuần</h4>
+          <p>Chạy song song Netcore và tool mới trong 4 tuần. Có kịch bản Rollback về Netcore ngay lập tức nếu test API tại POS nhà hàng thất bại.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06. RỦI RO ============ -->
+  <section>
+    <div class="shead rv">
+      <span class="snum">06</span>
+      <h2>Rủi ro, pháp lý &amp; bảo mật</h2>
+    </div>
+    <p class="slead rv">Các chốt chặn kiểm soát và phương án giảm thiểu tương ứng.</p>
+
+    <div class="grid2">
+      <div class="risk rv">
+        <div class="rhd"><span class="rbadge">RỦI RO</span><h4>Dữ liệu thất thoát khi chuyển đổi</h4></div>
+        <div class="rmit">
+          <b>Phương án giảm thiểu</b>
+          Chạy đối soát song song (Reconciliation) hàng ngày giữa DAT và hệ thống mới trong suốt thời gian Dual-run.
+        </div>
+      </div>
+      <div class="risk rv">
+        <div class="rhd"><span class="rbadge">RỦI RO</span><h4>Spam nhầm khách do cấu hình sai</h4></div>
+        <div class="rmit">
+          <b>Phương án giảm thiểu</b>
+          Thiết lập Global Capping rule mặc định — tối đa 2 tin/tuần/user — ngay từ Day 1 khi go-live.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <!-- ============ TAB 2 · USE CASE ============ -->
+  <div class="tab-panel" id="t2">
+
+<!-- ============ SUMMARY ============ -->
+  <div class="summary">
+    <div class="scard rv">
+      <div class="swin">★ CAO NHẤT</div>
+      <div class="sname">Insider <span class="savg">3.71</span></div>
+      <div class="srank">22 đáp ứng đầy đủ / 23 · điểm TB 3.71</div>
+      <div class="sbar">
+        <i style="background:var(--full);width:95.7%"></i>
+        <i style="background:var(--part);width:4.3%"></i>
+      </div>
+      <div class="sstat">
+        <span class="st"><i class="pt" style="background:var(--full)"></i><b>22</b>đủ</span>
+        <span class="st"><i class="pt" style="background:var(--part)"></i><b>1</b>một phần</span>
+        <span class="st"><i class="pt" style="background:var(--none)"></i><b>0</b>không</span>
+      </div>
+    </div>
+    <div class="scard rv">
+      <div class="sname">CleverTap <span class="savg">3.68</span></div>
+      <div class="srank">22 đáp ứng đầy đủ / 23 · điểm TB 3.68</div>
+      <div class="sbar">
+        <i style="background:var(--full);width:95.7%"></i>
+        <i style="background:var(--part);width:4.3%"></i>
+      </div>
+      <div class="sstat">
+        <span class="st"><i class="pt" style="background:var(--full)"></i><b>22</b>đủ</span>
+        <span class="st"><i class="pt" style="background:var(--part)"></i><b>1</b>một phần</span>
+        <span class="st"><i class="pt" style="background:var(--none)"></i><b>0</b>không</span>
+      </div>
+    </div>
+    <div class="scard rv">
+      <div class="sname">Antsomi <span class="savg">2.91</span></div>
+      <div class="srank">16 đáp ứng đầy đủ / 23 · điểm TB 2.91</div>
+      <div class="sbar">
+        <i style="background:var(--full);width:69.6%"></i>
+        <i style="background:var(--part);width:21.7%"></i>
+        <i style="background:var(--none);width:8.7%"></i>
+      </div>
+      <div class="sstat">
+        <span class="st"><i class="pt" style="background:var(--full)"></i><b>16</b>đủ</span>
+        <span class="st"><i class="pt" style="background:var(--part)"></i><b>5</b>một phần</span>
+        <span class="st"><i class="pt" style="background:var(--none)"></i><b>2</b>không</span>
+      </div>
+    </div>
+    <div class="scard rv">
+      <div class="sname">Netcore <span class="savg">1.31</span></div>
+      <div class="srank">9 đáp ứng đầy đủ / 23 · điểm TB 1.31 · hiện tại</div>
+      <div class="sbar">
+        <i style="background:var(--full);width:39.1%"></i>
+        <i style="background:var(--part);width:8.7%"></i>
+        <i style="background:var(--none);width:52.2%"></i>
+      </div>
+      <div class="sstat">
+        <span class="st"><i class="pt" style="background:var(--full)"></i><b>9</b>đủ</span>
+        <span class="st"><i class="pt" style="background:var(--part)"></i><b>2</b>một phần</span>
+        <span class="st"><i class="pt" style="background:var(--none)"></i><b>12</b>không</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ TABLE ============ -->
+  <div class="legend-bar">
+    <span><i style="background:var(--full)"></i>Đáp ứng</span>
+    <span><i style="background:var(--part)"></i>Đáp ứng một phần</span>
+    <span><i style="background:var(--none)"></i>Không đáp ứng</span>
+    <span style="margin-left:auto;font-style:italic;color:var(--soft)">Số bên dưới mỗi ô là điểm đánh giá (thang 5) · "—" = không áp dụng</span>
+  </div>
+  <div class="tablecard">
+    <div class="thead">
+      <div>#</div>
+      <div>Mục tiêu</div>
+      <div>Kịch bản gợi ý</div>
+      <div>Trường thông tin customize</div>
+      <div class="tsys">Netcore</div>
+      <div class="tsys">Antsomi</div>
+      <div class="tsys">Insider</div>
+      <div class="tsys">CleverTap</div>
+    </div>
+    <div id="rows"></div>
+  </div>
+
+  </div>
+
+</div>
+
+<script>
+const io=new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      io.unobserve(e.target);
+    }
+  });
+},{threshold:.12});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+const barIO=new IntersectionObserver((es)=>{
+  es.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.bfill').forEach((b,i)=>{
+        setTimeout(()=>{b.style.width=b.dataset.w+'%'},i*60);
+      });
+      barIO.unobserve(e.target);
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.crit').forEach(el=>barIO.observe(el));
+
+const SYS=["Netcore","Antsomi","Insider","CleverTap"];
+const LVLTXT={full:"Đáp ứng",part:"Một phần",none:"Không đáp ứng"};
+const LVLIC={full:"●",part:"◐",none:"○"};
+
+// id, goal, scenario, fields, current-system, [levels], [scores Netcore,Antsomi,Insider,CleverTap]
+const DATA=[
+ [1,"Recruit user","Tặng voucher/coupon cho khách đăng ký mới (CO/SO, scan QR tải app, follow Zalo); tặng voucher cho hội viên refer hội viên mới.","Vùng · Tỉnh thành · Brand · Nhà hàng · Kênh (CO/SO, email, website, zalo…)","Netcore",["full","full","full","full"],["2.8","4.3","4.0","3.8"]],
+ [2,"Cross Sales","Tặng voucher/coupon cho khách hàng để cross sales.","Location based (vùng, tỉnh, quận, bán kính) · Brand · Nhà hàng · Giá trị hóa đơn (TA/AOV) · Profile","Netcore",["full","part","full","full"],["3.0","3.0","4.5","4.0"]],
+ [3,"Up Sales","Tặng voucher/coupon tăng doanh thu, giới thiệu menu sau khi khách đặt bàn (web hoặc app).","Location based · Brand · Nhà hàng · Giá trị hóa đơn (TA/AOV) · Profile","Netcore",["full","part","full","full"],["2.7","3.3","3.8","3.5"]],
+ [4,"Gamification trên website","Triển khai gamification trên website.","Theo tỉnh/thành · Traffic từ QR code · Link quảng cáo · Hành vi truy cập (cookie) · Tệp khách hàng","Antsomi",["part","full","full","full"],["1.8","4.3","4.8","4.8"]],
+ [5,"Gamification trên App","Triển khai gamification trên App Golden Spoon.","Theo tỉnh/thành · Traffic từ QR code · Link quảng cáo · Tệp khách hàng","Netcore",["part","full","full","full"],["1.7","4.0","4.5","4.5"]],
+ [6,"Follow-up theo hành vi trên app","Tặng voucher/coupon theo hành vi khách trên app, kêu gọi khách vào cửa hàng.","Booking · Tìm kiếm từ khóa · Xem tin tức/ưu đãi · Tìm nhà hàng · Xem brand · Đặt hàng online · Tới gần nhà hàng (GPS)","Netcore",["full","part","full","full"],["3.0","2.3","4.0","3.8"]],
+ [7,"Target khách burn G-coin","Tặng voucher cho khách tồn nhiều G-coin; tăng voucher khi có hành vi đổi G-coin.","Profile (tuổi, tier, location…) · SL G-coin tồn · Hành vi đổi G-coin, thời hạn hết hạn","Netcore",["full","full","full","full"],["3.0","3.5","4.5","4.0"]],
+ [8,"Survey khách hàng","Survey qua pop-up app, pop-up web, email (AMP) và Zalo.","Theo danh sách KH có sẵn · Theo tập tự chọn (location, TA, brand, tier, hành vi app…)","Netcore",["full","part","full","full"],["2.3","3.8","4.0","3.8"]],
+ [9,"Re-target lead trong CDP","Re-target nhóm Sleep member (uninstall app, tắt noti) và Warm Lead.","Re-target quảng cáo Facebook/Google Ads · Re-target qua mail, ZNS, SMS","Netcore",["full","full","full","full"],["2.5","3.5","4.0","4.0"]],
+ [10,"Product experience","Hướng dẫn khách hàng mới; highlight tính năng trên app/website.","Theo danh sách KH có sẵn · Theo hành vi khách hàng","Netcore",["full","none","full","full"],["3.8","1.0","3.3","4.3"]],
+ [11,"Email AMP","Recruit user, booking, đặt hàng ngay trên email AMP.","—","Netcore",["full","none","full","full"],["4.0","—","3.3","3.3"]],
+ [12,"Sắp xếp Voucher thông minh trong Ví","Voucher trong ví hiển thị theo mức độ quan trọng để nhắc khách sử dụng.","P1: Sắp hết hạn (<3 ngày) · P2: Giá trị cao · P3: Brand tương tác nhiều nhất (Affinity)","N/a",["none","full","full","full"],["—","0.8","1.0","2.0"]],
+ [13,'Gợi ý Ưu đãi "Cần lấy" (Pick-up)',"Hiển thị tại Home các voucher khách chưa sở hữu nhưng có khả năng quan tâm cao.","Loại trừ voucher đã có trong ví · Algorithm: User Based hoặc Trending","N/a",["none","full","full","full"],["—","3.5","4.3","4.3"]],
+ [14,"Gợi ý địa điểm thông minh (Smart Geo-Location)","Gợi ý nhà hàng phù hợp nhất theo vị trí thực tế, xử lý cụm TTTM/Cluster.","Lọc bán kính gần nhất · Cluster: ưu tiên brand có voucher / brand yêu thích / brand campaign lớn","N/a",["none","full","full","full"],["0.3","2.0","3.8","4.0"]],
+ [15,"Gợi ý Booking theo ngữ cảnh","Nhắc đặt bàn dựa trên hành vi tìm kiếm hoặc xem menu dang dở.","Trigger: tìm 'Lẩu' hoặc xem Manwah rồi thoát · Action: widget 'Tiếp tục đặt bàn?'","N/a",["none","full","full","full"],["—","3.0","4.0","3.3"]],
+ [16,"Gợi ý theo Thời tiết (Weather-based)","Suggest đặt bàn, sản phẩm hoặc menu theo thời tiết thực tế tại vị trí khách.","Input nhiệt độ & điều kiện · Mưa/lạnh → Lẩu nướng · Nắng nóng → Bia, đồ Nhật · Mưa to → giao hàng","N/a",["none","part","part","part"],["—","2.8","2.3","2.8"]],
+ [17,"Menu động theo khung giờ (Time-based)","Gợi ý món/concept thay đổi theo thời điểm trong ngày, ngày thường và cuối tuần.","10h–13h → Set Lunch, cơm văn phòng · 16h–20h → Buffet, Lẩu nướng · Kết hợp phân khúc và giờ","N/a",["none","full","full","full"],["—","3.3","3.8","3.8"]],
+ [18,"Gợi ý món kèm (Pairing / Cross-sell)","Khi khách xem chi tiết món hoặc quét QR tại bàn, gợi ý món tăng giá trị đơn.","Món thường mua cùng nhau (Purchased Together) · Nước uống/tráng miệng đi kèm (Complementary)","N/a",["none","full","full","full"],["—","3.3","3.8","3.8"]],
+ [19,"Gợi ý chéo theo hành vi (Behavioral Cross-sell)","Giới thiệu Brand mới cho khách trung thành của Brand cũ dựa trên sự tương đồng.","User thích Brand A → tìm Brand B có tệp KH tương đồng → gợi ý trải nghiệm Brand B","N/a",["none","full","full","full"],["—","2.8","3.8","4.0"]],
+ [20,"Gợi ý brand yêu thích sau x ngày chưa quay lại","Gợi nhớ lại brand đã từng dùng sau x ngày khách chưa quay lại.","Ưu tiên brand có voucher trong ví / brand yêu thích nhất / brand có campaign lớn","N/a",["none","full","full","full"],["—","2.8","4.3","3.8"]],
+ [21,"Phản hồi Chủ động (Explicit Feedback)","Người dùng chủ động báo 'Không thích / Đã ăn rồi' để hệ thống dừng hiển thị.","Nút 'x' trên widget · Ẩn ngay lập tức + hạ điểm Affinity + thêm vào Exclusion List","N/a",["none","full","full","full"],["—","3.3","3.3","3.0"]],
+ [22,"Phản hồi Ngầm định (Implicit Feedback)","Hệ thống tự học từ hành vi không tương tác để thay đổi thuật toán.","Gợi ý hiển thị >3 lần không click → tự thay Algorithm khác · Re-ranking lại danh sách","N/a",["none","full","full","full"],["—","3.5","3.5","3.5"]],
+ [23,"Đánh giá hiệu quả (A/B Testing)","Đo lường Algorithm nào tạo ra chuyển đổi tốt nhất để giữ lại.","So sánh CTR/Conversion giữa các thuật toán · Dồn traffic vào thuật toán chiến thắng","N/a",["none","full","full","full"],["—","3.5","3.3","3.3"]],
+];
+
+const rowsEl=document.getElementById('rows');
+DATA.forEach(d=>{
+  const [id,goal,scn,field,cur,lvls,scrs]=d;
+  const row=document.createElement('div');
+  row.className='urow rv';
+  row.dataset.lvls=lvls.join(',');
+  let cells=
+    '<div class="u-id">'+String(id).padStart(2,'0')+'</div>'+
+    '<div class="u-goal">'+goal+'</div>'+
+    '<div class="u-scn">'+scn+'</div>'+
+    '<div class="u-field"><b>Trường customize:</b> '+field+
+      (cur!=='N/a'
+        ? '<span class="u-cur">Hiện trạng · '+cur+'</span>'
+        : '<span class="u-cur na">Hiện trạng · N/a</span>')+
+    '</div>';
+  lvls.forEach((lv,si)=>{
+    const isCur=(cur!=='N/a' && SYS[si]===cur);
+    const sc=scrs[si];
+    cells+='<div class="stat'+(isCur?' iscur':'')+'" data-si="'+si+'" data-lv="'+lv+'">'+
+      '<span class="pill '+lv+'"><span class="ic">'+LVLIC[lv]+'</span>'+LVLTXT[lv]+'</span>'+
+      '<span class="uscore'+(sc==='—'?' nasc':'')+'">'+(sc==='—'?'—':sc)+'</span>'+
+    '</div>';
+  });
+  row.innerHTML=cells;
+  rowsEl.appendChild(row);
+});
+
+// ---- TAB SWITCH ----
+const tabBtns=document.querySelectorAll('.tabbtn');
+const tabPanels=document.querySelectorAll('.tab-panel');
+tabBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    tabBtns.forEach(b=>b.classList.remove('on'));
+    tabPanels.forEach(p=>p.classList.remove('on'));
+    btn.classList.add('on');
+    document.getElementById(btn.dataset.tab).classList.add('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+    document.querySelectorAll('#'+btn.dataset.tab+' .rv').forEach(el=>{
+      if(!el.classList.contains('in')) io.observe(el);
+    });
+    document.querySelectorAll('#'+btn.dataset.tab+' .crit').forEach(el=>barIO.observe(el));
+  });
+});
+</script>
+</body>
+</html>
